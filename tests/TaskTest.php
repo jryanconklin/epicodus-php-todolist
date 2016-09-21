@@ -208,7 +208,6 @@
             $due_date = strtotime($due_date);
             $due_date = date('Y-m-d', $due_date);
             $test_task = new Task($description, $id, $category_id, $due_date);
-            var_dump($test_task);
 
             //Act
             $test_task->saveDate();

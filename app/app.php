@@ -12,6 +12,9 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+    
 //Home Path
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
@@ -49,6 +52,18 @@
 
     $app->get("/categories/{id}", function($id) use ($app) {
         $category = Category::findId($id);
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
+    });
+
+    $app->get("/categories/{id}/edit", function($id) use ($app) {
+        $category = Category::findId($id);
+        return $app['twig']->render('category_edit.html.twig', array('category' => $category));
+    });
+
+    $app->patch("/categories/{id}", function($id) use ($app) {
+        $name = $_POST['name'];
+        $category = Category::findId($id);
+        $category->update($name);
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
 
