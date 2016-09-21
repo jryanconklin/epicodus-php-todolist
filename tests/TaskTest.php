@@ -152,7 +152,72 @@
             $this->assertEquals($test_task, $result);
         }
 
+        function test_getDueDate()
+        {
+            //Arrange
+            $name = "Home stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
 
+            $description = "Wash the dog";
+            $category_id = $test_category->getId();
+            $due_date = "07/09/1980";
+            $test_task = new Task($description, $id, $category_id, $due_date);
+            $test_task->save();
+
+            //Act
+            $result = $test_task->getDueDate();
+
+            //Assert
+            $this->assertEquals($due_date, $result);
+        }
+
+        function test_convertDueDate()
+        {
+            //Arrange
+            $name = "Home stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "Wash the dog";
+            $category_id = $test_category->getId();
+            $due_date = "07/09/1980";
+            $test_task = new Task($description, $id, $category_id, $due_date);
+            $test_task->save();
+
+            //Act
+            $result = $test_task->convertDueDate($due_date);
+
+            //Assert
+            $this->assertEquals("1980-07-09", $result);
+        }
+
+        function test_saveDate()
+        {
+            //Arrange
+            $name = "Home stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $description = "Wash the dog";
+            $category_id = $test_category->getId();
+            $due_date = "07/09/1980";
+            $due_date = strtotime($due_date);
+            $due_date = date('Y-m-d', $due_date);
+            $test_task = new Task($description, $id, $category_id, $due_date);
+            var_dump($test_task);
+
+            //Act
+            $test_task->saveDate();
+
+            //Assert
+            $result = Task::getAll();
+            // var_dump($result[0]);
+            $this->assertEquals($test_task, $result[0]);
+        }
 
 
     }
