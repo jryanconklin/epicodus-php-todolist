@@ -3,13 +3,10 @@
     require_once __DIR__.'/../vendor/autoload.php';
     require_once __DIR__.'/../src/Task.php';
     require_once __DIR__."/../src/Category.php";
+    require __DIR__."/../inc/Connection.php";
 
     $app = new Silex\Application();
-
-    $server = 'mysql:host=localhost;dbname=to_do';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    $app['debug'] = true;
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
@@ -40,8 +37,8 @@
     });
 
     $app->post("/delete_categories", function() use ($app) {
-            Category::deleteAll();
-            return $app['twig']->render('index.html.twig');
+        Category::deleteAll();
+        return $app['twig']->render('index.html.twig');
     });
 
     $app->post("/delete_tasks", function() use ($app) {

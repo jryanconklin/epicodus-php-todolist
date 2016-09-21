@@ -1,15 +1,20 @@
 <?php
     class Category
     {
+//Properties
         private $name;
         private $id;
 
+
+//Constructor
         function __construct($name, $id = null)
         {
             $this->name = $name;
             $this->id = $id;
         }
 
+
+//Getter and Setters
         function setName($new_name)
         {
             $this->name = (string) $new_name;
@@ -25,12 +30,16 @@
             return $this->id;
         }
 
+
+//Regular Methods
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{$this->getName()}')");
             $this->id= $GLOBALS['DB']->lastInsertId();
         }
 
+
+//Static Methods
         static function getAll()
         {
             $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories;");
@@ -49,7 +58,7 @@
           $GLOBALS['DB']->exec("DELETE FROM categories;");
         }
 
-        static function find($search_id)
+        static function findCategoryID($search_id)
         {
             $found_category = null;
             $categories = Category::getAll();

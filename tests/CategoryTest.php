@@ -5,12 +5,8 @@
     * @backupStaticAttributes disabled
     */
 
-    require_once "src/Category.php";
-
-    $server = 'mysql:host=localhost;dbname=to_do_test';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    require_once __DIR__."/../src/Category.php";
+    require_once __DIR__."/../inc/ConnectionTest.php";
 
     class CategoryTest extends PHPUnit_Framework_TestCase
     {
@@ -107,7 +103,7 @@
             $test_Category2->save();
 
             //Act
-            $result = Category::find($test_Category->getId());
+            $result = Category::findCategoryID($test_Category->getId());
 
             //Assert
             $this->assertEquals($test_Category, $result);

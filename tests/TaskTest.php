@@ -5,13 +5,8 @@
     * @backupStaticAttributes disabled
     */
 
-    require_once "src/Task.php";
-
-    $server = 'mysql:host=localhost;dbname=to_do_test';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
-
+    require_once __DIR__."/../src/Task.php";
+    require_once __DIR__."/../inc/ConnectionTest.php";
 
     class TaskTest extends PHPUnit_Framework_TestCase
     {
@@ -92,7 +87,7 @@
 
             //Act
             $id = $test_task->getId();
-            $result = Task::find($id);
+            $result = Task::findTaskID($id);
 
             //Assert
             $this->assertEquals($test_task, $result);
