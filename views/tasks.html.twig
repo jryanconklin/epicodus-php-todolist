@@ -1,8 +1,5 @@
-<html>
-<head>
-    <title>To Do List</title>
-</head>
-<body>
+{% include 'header.html.twig' %}
+
     <h1>To Do List</h1>
 
     {% if tasks is not empty %}
@@ -23,5 +20,5 @@
     <form action='delete_tasks' method='post'>
         <button type='submit'>Clear all</button>
     </form>
-</body>
-</html>
+
+{% include 'footer.html.twig' %}

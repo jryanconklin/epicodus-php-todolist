@@ -1,8 +1,5 @@
-<html>
-<head>
-    <title>To Do List</title>
-</head>
-<body>
+{% include 'header.html.twig' %}
+
     <h1>Categories</h1>
 
     {% if categories is not empty %}
@@ -24,6 +21,6 @@
         <button type='submit'>Clear</button>
     </form>
 
-    <p><a href='/'>Home</a></p>
-</body>
-</html>
+
+
+{% include 'footer.html.twig' %}

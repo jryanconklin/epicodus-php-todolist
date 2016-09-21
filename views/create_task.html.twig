@@ -1,10 +1,7 @@
-<html>
-<head>
-    <title>To Do List</title>
-</head>
-<body>
+{% include 'header.html.twig' %}
+
     <h1>You created a task!</h1>
     <p>{{ newtask.getDescription }}</p>
     <p><a href='/'>View your list of things to do.</a></p>
-</body>
-</html>
+
+{% include 'footer.html.twig' %}
