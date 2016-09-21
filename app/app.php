@@ -14,7 +14,7 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-    
+
 //Home Path
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
@@ -55,6 +55,7 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
 
+//Update Categories
     $app->get("/categories/{id}/edit", function($id) use ($app) {
         $category = Category::findId($id);
         return $app['twig']->render('category_edit.html.twig', array('category' => $category));
@@ -67,7 +68,15 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
 
-//Delete Categories Path
+//Delete Categories Path (From DB)
+    $app->delete("/categories/{id}", function($id) use ($app) {
+        $category = Category::findId($id);
+        $category->delete();
+        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
+    });
+
+
+//Delete Categories Path (From Session)
     $app->post("/delete_categories", function() use ($app) {
         Category::deleteAll();
         return $app['twig']->render('index.html.twig');
