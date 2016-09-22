@@ -1,5 +1,5 @@
 # To Do List Application
-Behavior Driven Design - Intro to PHPUnit
+Database Basics with PHP
 
 ## Features
 A To Do List application that saves Categories and Tasks to a database.
